@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claorie Calculator</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link href="css/datatables.css" rel="stylesheet"/>
+    <link href="css/datatables.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/newstyle.css" />
+    <link rel="stylesheet" href="bootstrap/bootstrap-5.0.2-dist/css/bootstrap.css"/>
+      <script src="js/jquery.js"></script>
+    <script src="js/datatables.js"></script>
+    <script src="js/datatables.min.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="bootstrap/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container bg-success">
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="formopen()" #exampleModal">
+       Add Calories
+        </button>
+      </div>
+  
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="CalorieCalculator">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="date"><b>Date</b></label>
+                  <input type="date" name="date" id="date" placeholder="Date" />
+                </div>
+                <div class="col-md-6">
+                  <label for="firstName"><b>First Name</b></label>
+                  <input type="text" name="FirstName" id="FirstName" placeholder="First Name" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="Calories"><b>Calories</b></label>
+                  <input type="number" name="Calories" id="Calories" placeholder="Total Calories" />
+                </div>
+                <div class="col-md-6">
+                  <label for="TargetCalorie"><b>Target Calories</b></label>
+                  <input type="number" name="TargetCalorie" id="TargetCalorie" placeholder="Target Calories" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="CaloriesBurned"><b>Calories Burned</b></label>
+                  <input type="number" name="CaloriesBurned" id="CaloriesBurned" placeholder="Calories Burned" />
+                </div>
+                <div class="col-md-6">
+                  <label for="TargetBurned"><b>Target Burned</b></label>
+                  <input type="text" id="TargetBurned" >
+                </div>
+              </div>
+            </form>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="FormClose()" data-bs-dismiss="modal">Close</button>
+  
+                <button class="btn btn-primary" type="button" id="submitbtn" onclick="submitFun()">Submit</button>
+                <button id="updateBtn"></button>
+                
+  
+              </div>
+           
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <table id="example" class="display">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th> Name</th>
+            <th>Calories</th>
+            <th>Target Calorie</th>
+            <th>Achived Calories</th>
+            <th>Calories Burned</th>
+            <th>Target Burned</th>
+            <th>Achieved Burned</th>
+            
+            <th>Action</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <script>
+       function FormClose() {
+      $("#exampleModal").modal("hide");
+    }
+    function formopen(){
+      $("#exampleModal").modal("show");
+      $("#submitbtn").show();
+      $("#updateBtn").hide();
+     // $("#CalorieCalculator").reset()
+      document.getElementById("CalorieCalculator").reset()
+
+
+    }
+      let table = [];
+      var idCount = 1;
+        var id = 4;
+    
+      $(document).ready(function() {
+       // $("#updatebtn").hide();
+        var data = [
+        {
+            "id": 0,
+            "date": "2022-03-04",
+            "FirstName":"Pavan Kumar",
+        "Calories": 2550,
+        "TargetCalorie": 2550,
+        "AchivedCalories": "true",
+        "CaloriesBurned":2000 ,
+        "TargetBurned": 2000,
+        "AchievedBurned": "true",
+          },
+          {
+            "id": 1,
+            "date": "2022-03-04",
+            "FirstName":" mahesh",
+        "Calories": 2550,
+        "TargetCalorie": 2550,
+        "AchivedCalories": "true",
+        "CaloriesBurned":2000 ,
+        "TargetBurned": 2000,
+        "AchievedBurned": "true",
+          },
+          {
+            "id": 2,
+            "date": "2022-03-04",
+            "FirstName":"charan",
+        "Calories": 2550,
+        "TargetCalorie": 2550,
+        "AchivedCalories": "true",
+        "CaloriesBurned":2000 ,
+        "TargetBurned": 2000,
+        "AchievedBurned": "true",
+          },
+          {
+            "id": 3,
+            "date": "2022-03-04",
+            "FirstName":"Rakesh",
+        "Calories": 2550,
+        "TargetCalorie": 2550,
+        "AchivedCalories": "true",
+        "CaloriesBurned":2000 ,
+        "TargetBurned": 2000,
+        "AchievedBurned": "true",
+          }
+        ];
+    
+         table = $('#example').DataTable({
+          data: data,
+          columns: [
+            { data: 'id' },
+            { data: 'date' },
+            { data: 'FirstName' },
+            { data: 'Calories' },
+            { data: 'TargetCalorie' },
+            { data: 'AchivedCalories' },
+            { data: 'CaloriesBurned' },
+            { data: 'TargetBurned' },
+            { data: 'AchievedBurned' },
+            {
+              data: null,
+              render: function(data) {
+                return `<button class="bg-success showrow" onclick="editbtn(${data.id})">Edit</button><button class="bg-danger btnDelete" onclick="del(${data.id})">Delete</button>`;
+              }
+            }
+          ]
+        });
+    
+        $('#example tbody').on('click', 'button.btnDelete', function() {
+          var row = $(this).closest('tr');
+          table.row(row).remove().draw();
+        });
+    
+        $('#example tbody').on('click', 'button.showrow', function() {
+         
+          var data = table.row($(this).closest('tr')).data();
+          console.log(data);
+        });
+    
+      
+        
+      });
+      function editbtn(id) {
+  // Retrieve the data of the row with the given ID
+  var rowData = table.row(id).data();
+$("#submitbtn").hide();
+$('#exampleModal').modal('show');
+document.getElementById("updateBtn").innerHTML=`<button class="btn btn-primary" type="button" onclick="updateData(${id})" >update</button>`;
+  // Populate the modal form fields with the row data
+  $('#date').val(rowData.date);
+  $('#FirstName').val(rowData.FirstName);
+  $('#Calories').val(rowData.Calories);
+  $('#TargetCalorie').val(rowData.TargetCalorie);
+  $('#AchivedCalories').val(rowData.AchivedCalories);
+  $('#CaloriesBurned').val(rowData.CaloriesBurned);
+  $('#TargetBurned').val(rowData.TargetBurned);
+  $('#AchievedBurned').val(rowData.AchievedBurned);
+  //$('#updateBtn').attr('onclick', 'updateData(' + id + ')'); // Set the onclick event for the update button
+  // Show the modal
+ 
+
+  // Remove the row from the table
+  //table.row(id).remove().draw(false);
+}
+function updateData(id) {
+  alert(id);
+  var date = $('#date').val();
+  var FirstName = $('#FirstName').val();
+  var Calories = $('#Calories').val();
+  var TargetCalorie = $('#TargetCalorie').val();
+  var AchivedCalories = $('#AchivedCalories').val();
+  var CaloriesBurned = $('#CaloriesBurned').val();
+  var TargetBurned = $('#TargetBurned').val();
+  var AchievedBurned = $('#AchievedBurned').val();
+
+  var rowIndex = table.row("#" + id).index();
+  table.row(rowIndex).data({
+    "id": id,
+    "date": date,
+    "FirstName": FirstName,
+    "Calories": Calories,
+    "TargetCalorie": TargetCalorie,
+    "AchivedCalories": AchivedCalories,
+    "CaloriesBurned": CaloriesBurned,
+    "TargetBurned": TargetBurned,
+    "AchievedBurned": AchievedBurned,
+    "Action": `<button class="bg-success showrow" onclick="editbtn(${id})">Edit</button><button class="bg-danger btnDelete" onclick="del(${id})">Delete</button>
+    <button class="bg-primary btnDelete" onclick="Food(${id})">Food</button>`
+  }).draw(false);
+
+  $('#exampleModal').modal('hide');
+  alert("Successfully updated");
+  document.getElementById('parent').reset();
+}
+
+      function submitFun() {
+          var date = $('#date').val();
+          var FirstName = $('#FirstName').val();
+          var Calories = $('#Calories').val();
+          var TargetCalorie = $('#TargetCalorie').val();
+          var AchivedCalories = $('#AchivedCalories').val();
+          var CaloriesBurned = $('#CaloriesBurned').val();
+          var TargetBurned = $('#TargetBurned').val();
+          var AchievedBurned = $('#AchievedBurned').val();
+          if(TargetCalorie==Calories){
+            var AchivedCalories ='True';
+          }
+          else{
+            var AchivedCalories = 'False';
+          }
+    if(TargetBurned==CaloriesBurned){
+      var AchievedBurned ='True';
+    }
+    else{
+      var AchievedBurned ='False';
+    }
+          table.row.add({
+            "id": id,
+            "date": date,
+            "FirstName": FirstName,
+            "Calories": Calories,
+            "TargetCalorie": TargetCalorie,
+            "AchivedCalories": AchivedCalories,
+            "CaloriesBurned": CaloriesBurned,
+            "TargetBurned": TargetBurned,
+            "AchievedBurned": AchievedBurned
+          }).draw(false);
+    
+          id++;
+          $('#exampleModal').modal('hide');
+          // document.getElementById('parent').reset();
+          alert("Successfully submitted");
+        }
+    </script>
+    
+
+  </body>
+</html>
